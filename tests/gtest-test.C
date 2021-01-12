@@ -58,6 +58,21 @@ TEST_F(UtilityTimerTest, TicTocMeasure){
     //Elapsed: 0.00180548s
 }
 
+TEST_F (UtilityTimerTest, todo){
+    // TODO
+    //QuickTicToc quickTimer;
+    //for (int i = 0; i < 10000000; ++i);
+    //quickTimer.~QuickTicToc();
+
+    P23::QuickTicToc *q = new P23::QuickTicToc;
+    for (int i = 0; i < 10000000; ++i);
+    delete q;
+
+    auto t = new P23::QuickTicToc;
+    for (int i = 0; i < 10000000; ++i);
+    delete t;
+}
+
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

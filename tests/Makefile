@@ -1,21 +1,27 @@
 CFLAGS			:= -Wall
-#LIBS_I 			:= pkg-config --libs-only-l gtest gmock
-
 BIND			:= bin
 
 ifeq ($(OS),Windows_NT)
 	CC := x86_64-w64-mingw32-gcc
+	# TODO
 else
 	CC := g++
 	UNAME_S := $(shell uname -s)
     ifeq ($(UNAME_S),Linux)
-		#LIBS_I := `pkg-config --libs-only-l gtest gmock`
-		LIBS_I := -lgtest -pthread /usr/local/lib/libgtest.a
-
 		# Compiling for Linux
+
+		# Libs for every distro except useless Ubuntu...
+		ifeq ($(shell grep Ubuntu /etc/os-release), )
+			LIBS_I := `pkg-config --libs-only-l gtest gmock`
+		else
+		# Libs for Ubuntu
+			LIBS_I := -lgtest -pthread /usr/local/lib/libgtest.a
+		endif
+
     endif
     ifeq ($(UNAME_S),Darwin)
 		# Compiling for Mac OS
+		# TODO
 	endif
 endif
 
